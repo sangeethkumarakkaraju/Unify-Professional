@@ -1,0 +1,35 @@
+# BEGIN WP Hide & Security Enhancer
+<IfModule mod_rewrite.c> 
+RewriteEngine On 
+RewriteBase /sunify/ 
+#WriteCheckString:1586798082_93408
+RewriteRule .* - [E=HTTP_MOD_REWRITE:On]
+
+RewriteRule ^juvarin.php(.*) /sunify/wp-login.php$1 [L,QSA]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^wp-login.php /index.php?wph-throw-404 [L]
+
+RewriteCond %{REQUEST_URI} /sunify/siledit-php$
+RewriteRule ^(.*)$ /sunify/siledit-php/ [R=301,L]
+RewriteRule ^siledit-php(.*) /sunify/wp-admin$1 [L,QSA]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^wp-admin(.+) /sunify/index.php?wph-throw-404 [L]
+
+</IfModule> 
+
+# END WP Hide & Security Enhancer
+
+# BEGIN WordPress
+# The directives (lines) between `BEGIN WordPress` and `END WordPress` are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /sunify/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /sunify/index.php [L]
+</IfModule>
+
+# END WordPress
